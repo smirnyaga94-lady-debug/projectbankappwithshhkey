@@ -47,5 +47,3 @@ def get_date(date_str: str) -> str:
 result = mask_account_card(input("Введите номер и название карты через пробел, или счет и номер счета через пробел:  "))
 print(result)
 print(get_date(input("Введите дату:  ")))
-#изменения
-print("Добрый день, уважаемый клиент")
