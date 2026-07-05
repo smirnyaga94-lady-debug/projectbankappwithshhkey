@@ -19,7 +19,7 @@ def sort_by_date(data: list[dict], reverse: bool = True) -> list[dict]:
     :param reverse: Порядок сортировки (True — убывание, False — возрастание)
     :return: Новый отсортированный список
     """
-    return sorted(data, key=lambda x: datetime.strptime(x["date"], "%Y-%m-%d"), reverse=reverse)
+    return sorted(data, key=lambda x: datetime.strptime(x["date"], "%Y-%m-%dT%H:%M:%S.%f"), reverse=reverse)
 
 
 data = [
