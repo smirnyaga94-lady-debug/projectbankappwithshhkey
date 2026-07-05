@@ -8,7 +8,7 @@
 
 1. Клонируйте репозиторий:
 ```
-https://github.com/smirnyaga94-lady-debug/bankappskypro.git
+git@github.com:smirnyaga94-lady-debug/projectbankappwithshhkey.git
 ```
 
 2. Установите зависимости:
