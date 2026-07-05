@@ -24,6 +24,3 @@ def get_mask_account(acc_num: str) -> str:
     shown_acc_num = acc_num[-4:]
     hidden_num = f"**{shown_acc_num}"
     return hidden_num
-
-
-
