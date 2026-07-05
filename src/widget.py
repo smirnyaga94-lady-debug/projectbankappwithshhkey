@@ -48,4 +48,4 @@ result = mask_account_card(input("Введите номер и название 
 print(result)
 print(get_date(input("Введите дату:  ")))
 #изменения
-print("Добрый день")
+print("Добрый день, уважаемый клиент")
