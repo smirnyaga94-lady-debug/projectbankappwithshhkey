@@ -3,7 +3,7 @@ name = "bank-app"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Your Name",email = "you@example.com"}
+    {name = "Irina",email = "smirnyaga94@gmail.com"}
 ]
 requires-python = ">=3.14"
 dependencies = [
@@ -31,7 +31,7 @@ exclude = 'venv'
 
 [tool.black]
 # Максимальная длина строки
-line-length = 119
+line-length = 300
 # Файлы, которые не нужно форматировать
 exclude = '''
 (
@@ -51,5 +51,5 @@ exclude = '''
 
 [tool.isort]
 # максимальная длина строки
-line_length = 119
+line_length = 300
 
