@@ -49,7 +49,7 @@ def get_date(date_str: str) -> str:
         return "Неверный формат данных"
 
 
-result = mask_account_card(input("Введите номер и название карты через пробел, или счет и номер счета через пробел: "))
 if __name__ == "__main__":
+    result = mask_account_card(input("Введите номер и название карты через пробел, или счет и номер счета через пробел: "))
     print(result)
     print(get_date(input("Введите дату:  ")))

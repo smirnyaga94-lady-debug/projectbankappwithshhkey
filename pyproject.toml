@@ -31,7 +31,7 @@ exclude = 'venv'
 
 [tool.black]
 # Максимальная длина строки
-line-length = 300
+line-length = 200
 # Файлы, которые не нужно форматировать
 exclude = '''
 (
@@ -51,5 +51,5 @@ exclude = '''
 
 [tool.isort]
 # максимальная длина строки
-line_length = 300
+line_length = 200
 
