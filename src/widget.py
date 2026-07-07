@@ -16,7 +16,7 @@ def mask_account_card(card_account_name: str) -> str:
 
         if "счет" in card_name.lower():
             hidden_num = masks.get_mask_account(card_number)
-        elif "Maestro" or "MasterCard" or "Visa Classic" or "Visa Platinum" or "Visa Gold" in card_name:
+        elif card_name in ("Maestro", "MasterCard", "Visa Classic", "Visa Platinum", "Visa Gold"):
             hidden_num = masks.get_mask_card_number(card_number)
 
         """Вывод маскированных данных"""
@@ -49,8 +49,7 @@ def get_date(date_str: str) -> str:
         return "Неверный формат данных"
 
 
-result = mask_account_card(
-    input("Введите номер и название карты через пробел, или счет и номер счета через пробел:  ")
-)
-print(result)
-print(get_date(input("Введите дату:  ")))
+result = mask_account_card(input("Введите номер и название карты через пробел, или счет и номер счета через пробел:  "))
+if __name__ == "__main__":
+    print(result)
+    print(get_date(input("Введите дату:  ")))
