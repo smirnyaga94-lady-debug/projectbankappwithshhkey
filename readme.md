@@ -1,5 +1,4 @@
 # Учебный проект "Маски для банков"
-
 ## Описание:
 
 Проект "Маски для банков" - это приложение для создания масок счетов или карт
@@ -8,7 +7,7 @@
 
 1. Клонируйте репозиторий:
 ```
-https://github.com/smirnyaga94-lady-debug/bankappskypro.git
+git@github.com:smirnyaga94-lady-debug/projectbankappwithshhkey.git
 ```
 
 2. Установите зависимости:
@@ -20,14 +19,7 @@ pip install -r requirements.txt
 
 1. Запустите программу:
 ```
-python main.py
+python widget.py
 ```
-2. Следуйте инструкции
 
-## Документация:
 
-Дополнительную информацию о структуре проекта и API можно найти в [документации](docs/README.md).
-
-## Лицензия:
-
-Проект распространяется под [лицензией MIT](LICENSE).
