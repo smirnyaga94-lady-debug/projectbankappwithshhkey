@@ -2,8 +2,6 @@
 
 import datetime
 
-from pycodestyle import continued_indentation
-
 from src import masks
 
 
@@ -58,6 +56,7 @@ def get_date(date_str: str) -> str:
         # Обработка случая, если передадут не строку (например, None или int),
         # так как у них нет метода .split()
         return "Неверный формат данных"
+
 
 if __name__ == "__main__":
     result = mask_account_card(input("Введите номер и название карты через пробел, или счет и номер счета через пробел: "))
