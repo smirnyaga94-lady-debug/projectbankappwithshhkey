@@ -20,3 +20,10 @@ def account_num_1():
 def account_num_2():
     return "73654108430135874305"
 
+@pytest.fixture
+def card_name():
+    return "Visa Classic 6831982476737658"
+
+@pytest.fixture
+def acc_name():
+    return "Счет 64686473678894779589"
