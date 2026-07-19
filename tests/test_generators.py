@@ -2,7 +2,6 @@ import pytest
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
-
 class TestTransactionFunctions:
 
     @pytest.fixture
@@ -16,7 +15,7 @@ class TestTransactionFunctions:
                 "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
                 "description": "Перевод организации",
                 "from": "Счет 75106830613657916952",
-                "to": "Счет 11776614605963066702"
+                "to": "Счет 11776614605963066702",
             },
             {
                 "id": 142264268,
@@ -25,7 +24,7 @@ class TestTransactionFunctions:
                 "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
                 "description": "Перевод со счета на счет",
                 "from": "Счет 19708645243227258542",
-                "to": "Счет 75651667383060284188"
+                "to": "Счет 75651667383060284188",
             },
             {
                 "id": 873106923,
@@ -34,7 +33,7 @@ class TestTransactionFunctions:
                 "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
                 "description": "Перевод со счета на счет",
                 "from": "Счет 44812258784861134719",
-                "to": "Счет 74489636417521191160"
+                "to": "Счет 74489636417521191160",
             },
             {
                 "id": 895315941,
@@ -43,7 +42,7 @@ class TestTransactionFunctions:
                 "operationAmount": {"amount": "56883.54", "currency": {"name": "USD", "code": "USD"}},
                 "description": "Перевод с карты на карту",
                 "from": "Visa Classic 6831982476737658",
-                "to": "Visa Platinum 8990922113665229"
+                "to": "Visa Platinum 8990922113665229",
             },
             {
                 "id": 594226727,
@@ -52,8 +51,8 @@ class TestTransactionFunctions:
                 "operationAmount": {"amount": "67314.70", "currency": {"name": "руб.", "code": "RUB"}},
                 "description": "Перевод организации",
                 "from": "Visa Platinum 1246377376343588",
-                "to": "Счет 14211924144426031657"
-            }
+                "to": "Счет 14211924144426031657",
+            },
         ]
 
     # --- ТЕСТЫ ДЛЯ filter_by_currency ---
@@ -85,25 +84,15 @@ class TestTransactionFunctions:
 
     def test_filter_by_currency_no_currency_key(self):
         """Проверка, что генератор не падает, если в структуре данных нет нужных ключей."""
-        corrupted_data = [
-            {"id": 111, "description": "Сломанная транзакция"},
-            {"id": 222, "operationAmount": {}}
-        ]
+        corrupted_data = [{"id": 111, "description": "Сломанная транзакция"}, {"id": 222, "operationAmount": {}}]
         result = list(filter_by_currency(corrupted_data, "USD"))
         assert result == []
-
 
     # --- ТЕСТЫ ДЛЯ transaction_descriptions ---
 
     def test_transaction_descriptions_correct(self, sample_transactions):
         """Проверка, что функция возвращает точные текстовые описания по порядку."""
-        expected_descriptions = [
-            "Перевод организации",
-            "Перевод со счета на счет",
-            "Перевод со счета на счет",
-            "Перевод с карты на карту",
-            "Перевод организации"
-        ]
+        expected_descriptions = ["Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет", "Перевод с карты на карту", "Перевод организации"]
         result = list(transaction_descriptions(sample_transactions))
         assert result == expected_descriptions
 
@@ -114,15 +103,13 @@ class TestTransactionFunctions:
 
     def test_transaction_descriptions_fallback(self):
         """Проверка устойчивости: возврат заглушки, если ключ 'description' потерян."""
-        mixed_data = [
-            {"id": 999, "description": "Всё ок"},
-            {"id": 888}  # Тут ключа нет
-        ]
+        mixed_data = [{"id": 999, "description": "Всё ок"}, {"id": 888}]  # Тут ключа нет
         result = list(transaction_descriptions(mixed_data))
         assert result == ["Всё ок", "Описание отсутствует"]
 
 
 # --- НАБОР ТЕСТОВ С ПАРАМЕТРИЗАЦИЕЙ ---
+
 
 class TestCardNumberGenerator:
 
@@ -136,8 +123,8 @@ class TestCardNumberGenerator:
             # Нижняя граница (нули)
             (0, 1, 2, "0000 0000 0000 0000", "0000 0000 0000 0001"),
             # Верхняя граница диапазона (максимальные значения номеров карт)
-            (9999999999999998, 9999999999999999, 2, "9999 9999 9999 9998", "9999 9999 9999 9999")
-        ]
+            (9999999999999998, 9999999999999999, 2, "9999 9999 9999 9998", "9999 9999 9999 9999"),
+        ],
     )
     def test_generator_range_and_boundaries(self, start, end, expected_count, first_card, last_card):
         """Проверяет правильность количества карт, крайние значения диапазона и их значения."""
@@ -148,14 +135,7 @@ class TestCardNumberGenerator:
         assert cards[0] == first_card
         assert cards[-1] == last_card
 
-    @pytest.mark.parametrize(
-        "start, end",
-        [
-            (1, 5),
-            (100000, 100005),
-            (9999999999999990, 9999999999999995)
-        ]
-    )
+    @pytest.mark.parametrize("start, end", [(1, 5), (100000, 100005), (9999999999999990, 9999999999999995)])
     def test_card_number_formatting(self, start, end):
         """Проверяет корректность строкового формата карт (Длина 19, блоки по 4 цифры через пробелы)."""
         generator = card_number_generator(start, end)
