@@ -6,10 +6,10 @@ def filter_by_currency(transactions, currency_code):
     :param currency_code: Строка с кодом валюты (например, 'USD').
     :return: Итератор, выдающий транзакции с нужной валютой.
     """
-    return (
-        transaction for transaction in transactions
-        if transaction.get('currency', {}).get('code') == currency_code
-    )
+    for tx in transactions:
+        current_code = tx.get('operationAmount', {}).get('currency', {}).get('code')
+        if current_code == currency_code:
+            yield tx
 
 
 def transaction_descriptions(transactions):
