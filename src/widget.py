@@ -11,6 +11,8 @@ def mask_account_card(card_account_name: str) -> str:
     """Если имя карты одиночное"""
     if len(splited_name) == 2:
         card_name, card_number = splited_name
+        if card_name not in ("Maestro", "MasterCard", "Visa Classic", "Visa Platinum", "Visa Gold", "Счет"):
+            return "Неверное имя карты или счета"
         if not card_number.isdigit():
             return "Неверный формат данных"
 
@@ -20,12 +22,15 @@ def mask_account_card(card_account_name: str) -> str:
             hidden_num = masks.get_mask_card_number(card_number)
 
         """Вывод маскированных данных"""
+
         result = f"{card_name} {hidden_num}"
         return result
 
     """Если имя карты двойное"""
     if len(splited_name) == 3:
         card_name, card_name_2, card_number = splited_name
+        if card_name not in ("Maestro", "MasterCard", "Visa", "Счет"):
+            return "Неверное имя карты или счета"
         if not card_number.isdigit():
             return "Неверный формат данных"
 
@@ -36,7 +41,7 @@ def mask_account_card(card_account_name: str) -> str:
         return result
 
     else:
-        return "Неверный формат"
+        return "Неверный формат данных"
 
 
 def get_date(date_str: str) -> str:
@@ -46,6 +51,10 @@ def get_date(date_str: str) -> str:
         # Возвращаем дату в требуемом формате ДД.ММ.ГГГГ
         return dt_obj.strftime("%d.%m.%Y")
     except ValueError:
+        return "Неверный формат данных"
+    except AttributeError:
+        # Обработка случая, если передадут не строку (например, None или int),
+        # так как у них нет метода .split()
         return "Неверный формат данных"
 
 

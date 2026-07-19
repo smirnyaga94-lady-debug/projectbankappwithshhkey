@@ -21,13 +21,21 @@ lint = [
     "isort (>=8.0.1,<9.0.0)",
     "mypy (>=2.1.0,<3.0.0)"
 ]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)"
+]
 
 [tool.mypy]
 warn_return_any = true
 no_implicit_optional = true
 disallow_untyped_defs = true
 exclude = 'venv'
-
+# Персональные настройки для папки с тестами
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+check_untyped_defs = false
 
 [tool.black]
 # Максимальная длина строки

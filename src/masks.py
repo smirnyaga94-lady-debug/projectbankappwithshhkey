@@ -23,3 +23,7 @@ def get_mask_account(acc_num: str) -> str:
         return "Ошибка: введено не число или неверное количество знаков."
     hidden_num = f"**{shown_acc_num}"
     return hidden_num
+
+
+if __name__ == "__main__":
+    print(get_mask_card_number("5999414228426353"))
