@@ -43,6 +43,7 @@ python -m pytest
 python -m pytest tests/test_masks.py
 python -m pytest tests/test_processing.py
 python -m pytest tests/test_widget.py
+python -m pytest tests/test_generators.py
 ```
 
 Просмотр покрытия кода с помощью [pytest-cov](https://pytest-cov.readthedocs.io/):
@@ -50,4 +51,52 @@ python -m pytest tests/test_widget.py
 python -m pytest --cov=название_модуля
 ```
 
+## 🛠️ Новые функции (Генераторы)
 
+В проект добавлены функции для работы с транзакциями и картами, реализованные в виде генераторов (для экономии памяти):
+
+1. **`filter_by_currency`** — фильтрует список транзакций по указанному коду валюты (например, `USD`).
+2. **`transaction_descriptions`** — лениво возвращает описание (`description`) для каждой транзакции.
+3. **`card_number_generator`** — генерирует номера карт в заданном диапазоне, автоматически форматируя их в блоки по 4 цифры (`0000 0000 0000 0001`).
+
+### Пример использования
+
+```python
+from your_module import card_number_generator, filter_by_currency
+
+# Генерируем номера карт от 1 до 5
+for card in card_number_generator(1, 5):
+    print(card)
+```
+
+## 🧪 Тестирование и покрытие (Coverage)
+
+Для проекта написаны модульные тесты с использованием `pytest`. Также настроена проверка типов `mypy`.
+
+### Запуск тестов
+
+Выполните команду в терминале для запуска всех тестов:
+```bash
+pytest
+```
+
+### Проверка покрытия тестами
+
+Чтобы узнать процент покрытия кода тестами и увидеть, какие строки были пропущены, запустите:
+```bash
+pytest --cov=src --cov-report=term-missing
+```
+*(Замените `src` на имя вашей папки с исходным кодом, если она называется иначе).*
+
+Для генерации интерактивного HTML-отчета:
+```bash
+pytest --cov=src --cov-report=html
+```
+После этого откройте файл `htmlcov/index.html` в любом браузере.
+
+### Проверка типов
+
+Для проверки статической типизации используйте `mypy`:
+```bash
+mypy src
+```
